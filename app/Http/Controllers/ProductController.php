@@ -27,7 +27,7 @@ class ProductController extends Controller
     }
     public function delete(Request $request, $id){
         $product=Products::find($id);
-        $product->delete();
+        $product->update($request->status('deleted'));
         return204;
     }
 

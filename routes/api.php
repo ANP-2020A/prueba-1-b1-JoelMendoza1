@@ -22,15 +22,22 @@ use Illuminate\Http\Request;
 
 
 //Customers
+Route::post('register', 'UserController@register');
+Route::post('login', 'UserController@authenticate');
+Route::get('product', 'ProductController@index');
+Route::get('product/{id}', 'ProductController@show');
 
-Route::get('articles', 'ProductController@index');
-Route::get('articles/{id}', 'ProductController@show');
-Route::post('articles', 'ProductController@store');
-Route::put('articles/{id}', 'ProductController@update');
-Route::delete('articles/{id}', 'ProductController@delete');
+Route::group(['middleware' => ['jwt.verify']], function() {
 
-Route::get('articles', 'CustomersController@index');
-Route::get('articles/{id}', 'CustomersController@show');
-Route::post('articles', 'CustomersController@store');
-Route::put('articles/{id}', 'CustomersController@update');
-Route::delete('articles/{id}', 'CustomersController@delete');
+    Route::get('user', 'UserController@getAuthenticatedUser');
+
+    Route::post('product', 'ProductController@store');
+    Route::put('product/{id}', 'ProductController@update');
+    Route::delete('product/{id}', 'ProductController@delete');
+
+    Route::get('customer', 'CustomersController@index');
+    Route::get('customer/{id}', 'CustomersController@show');
+    Route::post('customer', 'CustomersController@store');
+    Route::put('customer/{id}', 'CustomersController@update');
+    Route::delete('customer/{id}', 'CustomersController@delete');
+});
