@@ -1,5 +1,7 @@
 <?php
 
+use App\Customers;
+use App\Products;
 use Illuminate\Http\Request;
 
 /*
@@ -13,6 +15,22 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+//Products
+
+
+//Customers
+
+Route::get('articles', 'ProductController@index');
+Route::get('articles/{id}', 'ProductController@show');
+Route::post('articles', 'ProductController@store');
+Route::put('articles/{id}', 'ProductController@update');
+Route::delete('articles/{id}', 'ProductController@delete');
+
+Route::get('articles', 'CustomersController@index');
+Route::get('articles/{id}', 'CustomersController@show');
+Route::post('articles', 'CustomersController@store');
+Route::put('articles/{id}', 'CustomersController@update');
+Route::delete('articles/{id}', 'CustomersController@delete');
